@@ -5,8 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "waku dev",
-    "build": "curl -o src/data/chengyu-raw.json https://raw.githubusercontent.com/pwxcoo/chinese-xinhua/master/data/idiom.json && waku build",
-    "start": "waku start"
+    "build": "mkdir -p src/data && curl -o src/data/chengyu-raw.json https://raw.githubusercontent.com/pwxcoo/chinese-xinhua/master/data/idiom.json && waku build",    "start": "waku start"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",

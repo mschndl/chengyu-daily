@@ -211,5 +211,5 @@ export default async function HomePage() {
 }
 
 export const getConfig = async () => {
-  return { render: 'dynamic' } as const;
+  return { render: 'static' } as const;
 };

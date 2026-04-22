@@ -1,7 +1,9 @@
 export default async function HomePage() {
   return (
-    <main>
-      <h1>Chengyu Daily</h1>
+    <main className="min-h-screen flex items-center justify-center" style={{ background: 'var(--background)' }}>
+      <h1 className="text-4xl font-bold" style={{ color: 'var(--foreground)' }}>
+        Chengyu Daily
+      </h1>
     </main>
   );
 }

@@ -9,10 +9,15 @@
     "start": "waku start"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.2.4",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "hono": "^4.12.14",
+    "lucide-react": "^1.8.0",
     "react": "~19.2.5",
     "react-dom": "~19.2.5",
     "react-server-dom-webpack": "~19.2.5",
+    "tailwind-merge": "^3.5.0",
     "waku": "1.0.0-alpha.8"
   },
   "devDependencies": {

@@ -6,3 +6,4 @@ dist
 .DS_Store
 *.pem
 src/data/chengyu-raw.json
+.vercel

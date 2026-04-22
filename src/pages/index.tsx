@@ -1,4 +1,5 @@
 import { getDailyChengyu } from '../lib/chengyu';
+import { getChengyuAIContent } from '../lib/ai';
 import { Card, CardContent, CardHeader } from '../components/ui/card';
 
 function getDayOfYear(): number {
@@ -20,12 +21,14 @@ function formatDate(): string {
 export default async function HomePage() {
   const chengyu = getDailyChengyu();
   const day = getDayOfYear();
+  const ai = await getChengyuAIContent(
+    chengyu.word,
+    chengyu.pinyin,
+    chengyu.explanation,
+  );
 
   return (
-    <main
-      className="min-h-screen"
-      style={{ background: 'var(--background)' }}
-    >
+    <main className="min-h-screen" style={{ background: 'var(--background)' }}>
       {/* Header */}
       <header
         className="flex items-center justify-between px-6 py-4 border-b"
@@ -59,9 +62,8 @@ export default async function HomePage() {
         </div>
       </header>
 
-      {/* Desktop: two-column / Mobile: stacked */}
+      {/* Body */}
       <div className="max-w-6xl mx-auto">
-
         <div className="flex flex-col md:grid md:grid-cols-2 md:min-h-[calc(100vh-57px)]">
 
           {/* Left — Hero */}
@@ -69,21 +71,16 @@ export default async function HomePage() {
             className="flex flex-col justify-center items-center text-center px-8 py-16 md:py-0 md:border-r relative"
             style={{ borderColor: 'var(--border)' }}
           >
-            {/* Seal stamp */}
+            {/* Seal */}
             <div
               className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center border-2 rounded-sm opacity-50"
-              style={{
-                borderColor: 'var(--primary)',
-                transform: 'rotate(-6deg)',
-                fontFamily: 'var(--font-hanzi)',
-              }}
+              style={{ borderColor: 'var(--primary)', transform: 'rotate(-6deg)', fontFamily: 'var(--font-hanzi)' }}
             >
               <span className="text-xs font-bold leading-tight text-center" style={{ color: 'var(--primary)' }}>
                 日<br />記
               </span>
             </div>
 
-            {/* Day label */}
             <p
               className="text-xs tracking-[0.25em] uppercase mb-8"
               style={{ fontFamily: 'var(--font-mono)', color: 'var(--accent)' }}
@@ -91,7 +88,6 @@ export default async function HomePage() {
               Today's Idiom
             </p>
 
-            {/* The chengyu */}
             <h1
               className="text-7xl sm:text-8xl font-bold tracking-widest mb-8 leading-none"
               style={{ fontFamily: 'var(--font-hanzi)', color: 'var(--foreground)' }}
@@ -99,7 +95,6 @@ export default async function HomePage() {
               {chengyu.word}
             </h1>
 
-            {/* Pinyin */}
             <p
               className="text-lg italic tracking-widest mb-4"
               style={{ fontFamily: 'var(--font-display)', color: 'var(--primary)' }}
@@ -107,7 +102,6 @@ export default async function HomePage() {
               {chengyu.pinyin}
             </p>
 
-            {/* Explanation */}
             <p
               className="text-sm leading-relaxed max-w-xs font-light"
               style={{ color: 'var(--muted-foreground)' }}
@@ -117,9 +111,9 @@ export default async function HomePage() {
           </div>
 
           {/* Right — Details */}
-          <div className="flex flex-col gap-6 px-8 py-12 md:py-16 md:overflow-y-auto">
+          <div className="flex flex-col gap-6 px-8 py-12 md:py-16">
 
-            {/* Origin */}
+            {/* Classical origin from dataset */}
             {chengyu.derivation && (
               <Card>
                 <CardHeader>
@@ -131,10 +125,7 @@ export default async function HomePage() {
                   </p>
                 </CardHeader>
                 <CardContent>
-                  <div
-                    className="border-l-2 pl-4"
-                    style={{ borderColor: 'var(--primary)' }}
-                  >
+                  <div className="border-l-2 pl-4" style={{ borderColor: 'var(--primary)' }}>
                     <p
                       className="text-sm italic leading-relaxed"
                       style={{ fontFamily: 'var(--font-display)', color: 'var(--card-foreground)' }}
@@ -146,8 +137,30 @@ export default async function HomePage() {
               </Card>
             )}
 
-            {/* Example */}
-            {chengyu.example && (
+            {/* AI English history */}
+            {ai?.englishHistory && (
+              <Card>
+                <CardHeader>
+                  <p
+                    className="text-xs tracking-[0.25em] uppercase"
+                    style={{ fontFamily: 'var(--font-mono)', color: 'var(--muted-foreground)' }}
+                  >
+                    History & Context
+                  </p>
+                </CardHeader>
+                <CardContent>
+                  <p
+                    className="text-sm leading-relaxed font-light"
+                    style={{ color: 'var(--card-foreground)' }}
+                  >
+                    {ai.englishHistory}
+                  </p>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* AI English example */}
+            {ai?.englishExample && (
               <Card>
                 <CardHeader>
                   <p
@@ -159,14 +172,37 @@ export default async function HomePage() {
                 </CardHeader>
                 <CardContent>
                   <p
+                    className="text-sm leading-relaxed italic font-light"
+                    style={{ fontFamily: 'var(--font-display)', color: 'var(--card-foreground)' }}
+                  >
+                    "{ai.englishExample}"
+                  </p>
+                </CardContent>
+              </Card>
+            )}
+
+            {/* Original example */}
+            {chengyu.example && (
+              <Card>
+                <CardHeader>
+                  <p
+                    className="text-xs tracking-[0.25em] uppercase"
+                    style={{ fontFamily: 'var(--font-mono)', color: 'var(--muted-foreground)' }}
+                  >
+                    Classical Example
+                  </p>
+                </CardHeader>
+                <CardContent>
+                  <p
                     className="text-sm leading-relaxed font-light"
-                    style={{ color: 'var(--card-foreground)' }}
+                    style={{ fontFamily: 'var(--font-hanzi)', color: 'var(--card-foreground)' }}
                   >
                     {chengyu.example}
                   </p>
                 </CardContent>
               </Card>
             )}
+
           </div>
         </div>
       </div>

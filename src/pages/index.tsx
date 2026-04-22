@@ -28,7 +28,8 @@ export default async function HomePage() {
   );
 
   return (
-    <main className="min-h-screen" style={{ background: 'var(--background)' }}>
+    <main className="min-h-screen flex flex-col" style={{ background: 'var(--background)' }}>
+
       {/* Header */}
       <header
         className="flex items-center justify-between px-6 py-4 border-b"
@@ -63,8 +64,8 @@ export default async function HomePage() {
       </header>
 
       {/* Body */}
-      <div className="max-w-6xl mx-auto">
-        <div className="flex flex-col md:grid md:grid-cols-2 md:min-h-[calc(100vh-57px)]">
+      <div className="flex-1 max-w-6xl w-full mx-auto">
+        <div className="flex flex-col md:grid md:grid-cols-2 md:h-full">
 
           {/* Left — Hero */}
           <div
@@ -113,7 +114,7 @@ export default async function HomePage() {
           {/* Right — Details */}
           <div className="flex flex-col gap-6 px-8 py-12 md:py-16">
 
-            {/* Classical origin from dataset */}
+            {/* Classical origin */}
             {chengyu.derivation && (
               <Card>
                 <CardHeader>
@@ -137,7 +138,7 @@ export default async function HomePage() {
               </Card>
             )}
 
-            {/* AI English history */}
+            {/* AI History */}
             {ai?.englishHistory && (
               <Card>
                 <CardHeader>
@@ -167,7 +168,7 @@ export default async function HomePage() {
                     className="text-xs tracking-[0.25em] uppercase"
                     style={{ fontFamily: 'var(--font-mono)', color: 'var(--muted-foreground)' }}
                   >
-                    Example
+                    Example in English
                   </p>
                 </CardHeader>
                 <CardContent>
@@ -181,15 +182,15 @@ export default async function HomePage() {
               </Card>
             )}
 
-            {/* Original example */}
-            {chengyu.example && (
+            {/* AI Chinese example */}
+            {ai?.chineseExample && (
               <Card>
                 <CardHeader>
                   <p
                     className="text-xs tracking-[0.25em] uppercase"
                     style={{ fontFamily: 'var(--font-mono)', color: 'var(--muted-foreground)' }}
                   >
-                    Classical Example
+                    Example in Chinese
                   </p>
                 </CardHeader>
                 <CardContent>
@@ -197,7 +198,7 @@ export default async function HomePage() {
                     className="text-sm leading-relaxed font-light"
                     style={{ fontFamily: 'var(--font-hanzi)', color: 'var(--card-foreground)' }}
                   >
-                    {chengyu.example}
+                    {ai.chineseExample}
                   </p>
                 </CardContent>
               </Card>
@@ -206,6 +207,20 @@ export default async function HomePage() {
           </div>
         </div>
       </div>
+
+      {/* Footer */}
+      <footer
+        className="border-t px-6 py-4 flex items-center justify-center"
+        style={{ borderColor: 'var(--border)' }}
+      >
+        <p
+          className="text-xs text-center leading-relaxed"
+          style={{ fontFamily: 'var(--font-mono)', color: 'var(--muted-foreground)' }}
+        >
+          History and examples might be AI-generated · May contain inaccuracies
+        </p>
+      </footer>
+
     </main>
   );
 }

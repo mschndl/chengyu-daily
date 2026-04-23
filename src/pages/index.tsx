@@ -110,7 +110,7 @@ export default async function HomePage() {
           <div className="flex flex-col gap-6 px-8 py-12 md:py-16">
 
             {/* Classical origin */}
-            {chengyu.derivation && (
+            {chengyu.derivation && chengyu.derivation.trim() !== '无' && (
               <Card>
                 <CardHeader>
                   <p

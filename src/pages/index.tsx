@@ -1,6 +1,7 @@
 import { getDailyChengyu } from '../lib/chengyu';
 import { getChengyuAIContent } from '../lib/ai';
 import { Card, CardContent, CardHeader } from '../components/ui/card';
+import { Logo } from '../components/logo';
 
 function getDayOfYear(): number {
   const now = new Date();
@@ -35,19 +36,22 @@ export default async function HomePage() {
         className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 border-b backdrop-blur-sm"
         style={{ borderColor: 'var(--border)', background: 'color-mix(in oklch, var(--background) 85%, transparent)' }}
       >
-        <div className="flex items-baseline gap-3">
-          <span
-            className="text-lg font-bold tracking-wider"
-            style={{ fontFamily: 'var(--font-hanzi)', color: 'var(--primary)' }}
-          >
-            成語
-          </span>
-          <span
-            className="text-sm italic hidden sm:block"
-            style={{ fontFamily: 'var(--font-display)', color: 'var(--muted-foreground)' }}
-          >
-            Chengyu Daily
-          </span>
+        <div className="flex items-center gap-3">
+          <Logo size={34} />
+          <div className="flex flex-col gap-0.5">
+            <span
+              className="text-base font-bold tracking-wider leading-none"
+              style={{ fontFamily: 'var(--font-hanzi)', color: 'var(--foreground)' }}
+            >
+              成語
+            </span>
+            <span
+              className="text-xs italic hidden sm:block leading-none"
+              style={{ fontFamily: 'var(--font-display)', color: 'var(--muted-foreground)' }}
+            >
+              Chengyu Daily
+            </span>
+          </div>
         </div>
         <div
           className="text-xs tracking-widest uppercase hidden sm:block"

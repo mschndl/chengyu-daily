@@ -16,6 +16,15 @@ export async function getChengyuAIContent(
         return null;
     }
 
+    if (process.env.NODE_ENV === 'development') {
+        console.log('Skipping Gemini call in dev mode');
+        return {
+            englishHistory: '[Dev mode — AI content skipped to preserve API quota]',
+            englishExample: '[Dev mode — AI content skipped to preserve API quota]',
+            chineseExample: '[开发模式 — 已跳过AI内容]',
+        };
+    }
+
     const prompt = `You are a scholar of classical Chinese literature.
 
 For the Chinese idiom "${word}" (pinyin: ${pinyin}), which means: "${explanation}"

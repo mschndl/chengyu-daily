@@ -32,8 +32,8 @@ export default async function HomePage() {
 
       {/* Header */}
       <header
-        className="flex items-center justify-between px-6 py-4 border-b"
-        style={{ borderColor: 'var(--border)' }}
+        className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 border-b backdrop-blur-sm"
+        style={{ borderColor: 'var(--border)', background: 'color-mix(in oklch, var(--background) 85%, transparent)' }}
       >
         <div className="flex items-baseline gap-3">
           <span
@@ -72,15 +72,6 @@ export default async function HomePage() {
             className="flex flex-col justify-center items-center text-center px-8 py-16 md:py-0 md:border-r relative"
             style={{ borderColor: 'var(--border)' }}
           >
-            {/* Seal */}
-            <div
-              className="absolute top-6 right-6 w-12 h-12 flex items-center justify-center border-2 rounded-sm opacity-50"
-              style={{ borderColor: 'var(--primary)', transform: 'rotate(-6deg)', fontFamily: 'var(--font-hanzi)' }}
-            >
-              <span className="text-xs font-bold leading-tight text-center" style={{ color: 'var(--primary)' }}>
-                日<br />記
-              </span>
-            </div>
 
             <p
               className="text-xs tracking-[0.25em] uppercase mb-8"

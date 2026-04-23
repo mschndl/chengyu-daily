@@ -1,5 +1,6 @@
 import '../styles.css';
 import type { ReactNode } from 'react';
+import { Analytics } from '@vercel/analytics/react';
 
 type Props = { children: ReactNode };
 
@@ -15,6 +16,7 @@ export default async function RootLayout({ children }: Props) {
         rel="stylesheet"
       />
       {children}
+      <Analytics />
     </>
   );
 }

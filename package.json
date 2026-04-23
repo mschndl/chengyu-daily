@@ -5,10 +5,12 @@
   "private": true,
   "scripts": {
     "dev": "waku dev",
-    "build": "mkdir -p src/data && curl -o src/data/chengyu-raw.json https://raw.githubusercontent.com/pwxcoo/chinese-xinhua/master/data/idiom.json && waku build",    "start": "waku start"
+    "build": "mkdir -p src/data && curl -o src/data/chengyu-raw.json https://raw.githubusercontent.com/pwxcoo/chinese-xinhua/master/data/idiom.json && waku build",
+    "start": "waku start"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",
+    "@vercel/analytics": "^2.0.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "hono": "^4.12.14",

@@ -2,6 +2,7 @@ import { getDailyChengyu } from '../lib/chengyu';
 import { getChengyuAIContent } from '../lib/ai';
 import { Card, CardContent, CardHeader } from '../components/ui/card';
 import { Logo } from '../components/logo';
+import { SpeakButton } from '../components/speak-button';
 
 function getDayOfYear(): number {
   const now = new Date();
@@ -91,12 +92,15 @@ export default async function HomePage() {
               {chengyu.word}
             </h1>
 
-            <p
-              className="text-lg italic tracking-widest mb-4"
-              style={{ fontFamily: 'var(--font-display)', color: 'var(--primary)' }}
-            >
-              {chengyu.pinyin}
-            </p>
+            <div className="flex items-center gap-3 mb-4">
+              <p
+                className="text-lg italic tracking-widest"
+                style={{ fontFamily: 'var(--font-display)', color: 'var(--primary)' }}
+              >
+                {chengyu.pinyin}
+              </p>
+              <SpeakButton text={chengyu.word} />
+            </div>
 
             <p
               className="text-sm leading-relaxed max-w-xs font-light"
